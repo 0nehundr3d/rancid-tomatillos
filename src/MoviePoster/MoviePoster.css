@@ -23,6 +23,8 @@
     border-bottom-right-radius: 5px;
     padding: 6px 8px;
     margin-top: -5px;
+    display: flex;
+    justify-content: center;
 }
 
 .VoteBox p {
@@ -31,4 +33,9 @@
     font-weight: 600;
     color: black;
     text-align: center;
+}
+
+.VoteBox img {
+    height: 15px;
+    width: 15px;
 }
