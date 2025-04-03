@@ -1,0 +1,16 @@
+.MoviePoster {
+    width: 25%;
+    margin: 20px;
+    text-align: center;
+  }
+  
+  .MoviePoster img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  .MoviePoster h2 {
+    font-size: 0.5rem;
+    color: #444;
+  }
