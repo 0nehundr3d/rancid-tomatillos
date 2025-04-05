@@ -1,18 +1,27 @@
 import './MoviePoster.css';
 import upvote from '../icons/upvote.png'
 import downvote from '../icons/downvote.png'
+import movieDetails from '../data/movie_details';
 
-function MoviePoster({ title, poster_path, vote_count, changeScore, id }) {
+function MoviePoster({ title, poster_path, vote_count, changeScore, id, showMovieDetails }) {
   return (
-    <section className='MoviePoster'>
-        <img src={poster_path} alt={`Poster for ${title}`} />
+    <section className='MoviePoster' 
+      onClick={() => showMovieDetails(movieDetails)}>
+      <img src={poster_path} alt={`Poster for ${title}`} />
+
       <div className='VoteBox'>
-        <img onClick={() => {changeScore(id, true)}} src={upvote} />
+        <img onClick={(event) => { //added stopPropagation so the clicking of up/downvote wouldnt trigger the parent sections onClick
+          event.stopPropagation()
+          changeScore(id, true)}} src={upvote} />
+
         <p>Votes: {vote_count}</p>
-        <img onClick={() => {changeScore(id, false)}} src={downvote} />
+
+        <img onClick={(event) => {
+          event.stopPropagation()
+          changeScore(id, false)}} src={downvote} />
       </div>
     </section>
-  );
+  )
 }
 
 export default MoviePoster;

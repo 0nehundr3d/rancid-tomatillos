@@ -1,23 +1,23 @@
 * {
   margin: 0;
   padding: 0;
-  }
+}
 
 body {
   /* changed because, well tomatillos.... */
-  background-color: #c6e39b;
+  background-color: #a6c677;
 }
 
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 25px;
+  padding: 12px;
 }
 
 h1 {
   color: white;
-  font-size: 56px;
+  font-size: 45px;
   letter-spacing: 5px;
 }
 
@@ -25,5 +25,15 @@ p {
   font-size: 20px;
   text-align: center;
   margin-top: 50px;
+  color: white;
+}
+
+.HomeButton {
+  background-color: transparent;
+  border-color: transparent;
+}
+.HomeButton img {
+  width: 40px;
+  height: 40px;
   color: white;
 }

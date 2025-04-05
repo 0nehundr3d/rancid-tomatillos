@@ -21,21 +21,23 @@
     background-color: #ffffff;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    padding: 6px 8px;
-    margin-top: -5px;
+    padding: 5px;
+    margin-top: -4px;
     display: flex;
     justify-content: center;
 }
 
 .VoteBox p {
-    margin: 0;
+    margin: 1.8px;
     font-size: 0.65em;
     font-weight: 600;
-    color: black;
+    color: rgb(6, 6, 6);
     text-align: center;
 }
 
 .VoteBox img {
+    margin-top: -5px;
+    padding-top: 7px;
     height: 15px;
     width: 15px;
 }
