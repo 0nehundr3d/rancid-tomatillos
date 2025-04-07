@@ -6,7 +6,7 @@ import downvote from '../icons/downvote.png'
 function MoviePoster({ id, title, poster_path, vote_count, changeScore, setShowingDetails }) {
   return (
     <section className='MoviePoster'>
-      <img onClick={() => {setShowingDetails(true)}} src={poster_path} alt={`Poster for ${title}`} />
+      <img onClick={() => {setShowingDetails([true, id])}} src={poster_path} alt={`Poster for ${title}`} />
       <h3>{title}</h3>
 
       <div className='VoteBox'>

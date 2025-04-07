@@ -9,10 +9,11 @@ import { useEffect, useState } from 'react';
 
 // import MovieDetails from '../MovieDetails/MovieDetails'; //function
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
+import MovieDetails from '../MovieDetails/MovieDetails'
 
 function App() {
   const [moviePosters, setMoviePosters] = useState([])
-  const [showingDetails, setShowingDetails] = useState(false)
+  const [showingDetails, setShowingDetails] = useState([false, null])
 
   useEffect(() => {
     fetch(`https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies`)
@@ -53,12 +54,16 @@ function App() {
         <h1>rancid tomatillos</h1>
       </header>
 
-      { !showingDetails && 
+      { !showingDetails[0] && 
         <MoviesContainer 
           moviePosters={moviePosters} 
           changeScore={changeScore}
           setShowingDetails={setShowingDetails}
         />}
+
+      { showingDetails[0] &&
+        <MovieDetails
+        movie_id={showingDetails[1]}/>}
     </main>
   )
 }
