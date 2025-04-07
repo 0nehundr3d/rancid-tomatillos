@@ -3,10 +3,10 @@ import upvote from '../icons/upvote.png'
 import downvote from '../icons/downvote.png'
 // import movieDetails from '../data/movie_details';
 
-function MoviePoster({ id, title, poster_path, vote_count, changeScore }) {
+function MoviePoster({ id, title, poster_path, vote_count, changeScore, setShowingDetails }) {
   return (
     <section className='MoviePoster'>
-      <img src={poster_path} alt={`Poster for ${title}`} />
+      <img onClick={() => {setShowingDetails(true)}} src={poster_path} alt={`Poster for ${title}`} />
       <h3>{title}</h3>
 
       <div className='VoteBox'>

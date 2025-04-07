@@ -12,6 +12,7 @@ import MoviesContainer from '../MoviesContainer/MoviesContainer';
 
 function App() {
   const [moviePosters, setMoviePosters] = useState([])
+  const [showingDetails, setShowingDetails] = useState(false)
 
   useEffect(() => {
     fetch(`https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies`)
@@ -45,10 +46,6 @@ function App() {
       .catch(error => console.error("Failed to update vote count:", error))
   }
 
-  const showMovieDetails = () => {
-    document.querySelector(".MoviesContainer").classList.add("hidden")
-  }
-
   
   return (
     <main className='App'>
@@ -56,11 +53,12 @@ function App() {
         <h1>rancid tomatillos</h1>
       </header>
 
-      <MoviesContainer 
-        moviePosters={moviePosters} 
-        changeScore={changeScore}
-        showMovieDetails={showMovieDetails}
-      />
+      { !showingDetails && 
+        <MoviesContainer 
+          moviePosters={moviePosters} 
+          changeScore={changeScore}
+          setShowingDetails={setShowingDetails}
+        />}
     </main>
   )
 }
