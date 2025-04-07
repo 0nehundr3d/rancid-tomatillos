@@ -1,8 +1,9 @@
 import './MovieDetails.css';
+import { useEffect } from 'react';
 
 function MovieDetails({ movie_id }) {
   useEffect(() => {
-    fetch(`https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com//api/v1/movies/${movie_id}`)
+    fetch(`https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies/${movie_id}`)
     .then(((response) => response.json()))
     .then((data) => {
       console.log(data)
