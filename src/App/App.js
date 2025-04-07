@@ -45,6 +45,10 @@ function App() {
       .catch(error => console.error("Failed to update vote count:", error))
   }
 
+  const showMovieDetails = () => {
+    document.querySelector(".MoviesContainer").classList.add("hidden")
+  }
+
   
   return (
     <main className='App'>
@@ -55,6 +59,7 @@ function App() {
       <MoviesContainer 
         moviePosters={moviePosters} 
         changeScore={changeScore}
+        showMovieDetails={showMovieDetails}
       />
     </main>
   )

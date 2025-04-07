@@ -2,7 +2,7 @@
 import MoviePoster from '../MoviePoster/MoviePoster';
 import './MoviesContainer.css';
 
-function MoviesContainer({ moviePosters, changeScore }) { 
+function MoviesContainer({ moviePosters, changeScore, showMovieDetails }) { 
   if (!moviePosters) return <p>Loading...</p>
 
   return (
@@ -15,7 +15,7 @@ function MoviesContainer({ moviePosters, changeScore }) {
             poster_path={movie.poster_path}
             vote_count={movie.vote_count}
             changeScore={changeScore}
-            // showMovieDetails={showMovieDetails}
+            showMovieDetails={showMovieDetails}
           />
         ))}
       </section>
