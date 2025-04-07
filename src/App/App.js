@@ -1,59 +1,76 @@
 import './App.css';
-import { useState } from 'react';
-import searchIcon from '../icons/search.png';
-import homeIcon from '../icons/home.png';
+import { useEffect, useState } from 'react';
+// import searchIcon from '../icons/search.png';
 
 // Example imports (for later):
-// import { useState, useEffect } from 'react';
-import moviePosters from '../data/movie_posters';
-import movieDetails from '../data/movie_details'; //mock data
+// import moviePosters from '../data/movie_posters';
+// import movieDetails from '../data/movie_details'; //mock data
 
-import MovieDetails from '../MovieDetails/MovieDetails'; //function
+// import MovieDetails from '../MovieDetails/MovieDetails'; //function
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
+import MovieDetails from '../MovieDetails/MovieDetails'
+import homeIcon from '../icons/home.png'
 
 function App() {
-  const [selectedMovie, showMovieDetails] = useState(null) // Tracking if movie poster has been clicked
-  
-  const [scores, setScores] = useState(moviePosters.reduce((acc, movie) => {
-    acc[movie.id] = movie.vote_count
-    return acc
-  }, {}))
+  const [moviePosters, setMoviePosters] = useState([])
+  const [showingDetails, setShowingDetails] = useState([false, null])
 
-  function changeScore(movieId, upvote) {
-    const score = upvote ? 1 : -1
-    const movieIndex = moviePosters.findIndex(movie => movie.id === movieId)
+  useEffect(() => {
+    fetch(`https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies`)
+      .then((response) => response.json())
+      .then((data) => {
+        setMoviePosters(data)
+      })
+      .catch((err) => console.error("Fetch failed:", err));
+  }, [])
 
-    let newScores = structuredClone(scores)
-    newScores[movieId.toString()] += score
+  const changeScore = (id, upVoted) => {
+    const findMovie = moviePosters.find( movie => movie.id === id)
+    if (!findMovie) return
 
-    moviePosters[movieIndex].vote_count += score
-    
-    setScores(newScores)
+    const updatedVote = upVoted
+      ? findMovie.vote_count + 1
+      : findMovie.vote_count - 1
+      
+    fetch(`https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies/${id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ vote_direction: upVoted ? 'up' : 'down' })
+    })
+      .then(response => response.json())
+      .then(updatedMovie => {
+        const updatedList = moviePosters.map(movie => 
+          movie.id === id ? { ...movie, ...updatedMovie } : movie
+        )
+        setMoviePosters(updatedList)
+      })
+      .catch(error => console.error("Failed to update vote count:", error))
   }
 
+  
   return (
     <main className='App'>
       <header>
         <h1>rancid tomatillos</h1>
-          {selectedMovie && (
-            <button className="HomeButton" onClick={() => showMovieDetails(null)}>
-              <img src={homeIcon} alt="Home" />
-            </button>
-          )}
+        { showingDetails[0] &&
+        <div className='HomeButton'>
+          <img src={homeIcon} alt="Home Button" onClick={() => {setShowingDetails([false, null])}}/>
+        </div>
+        }
       </header>
 
-      {selectedMovie ? (
-          <MovieDetails movie={selectedMovie} />
-        ) : (   //similar to an if/else this is saying  
-                // If a movie has been selected, show the details view
-                // Otherwise show all movie posters
-          <MoviesContainer 
-            moviePosters={moviePosters} 
-            changeScore={changeScore}
-            showMovieDetails={showMovieDetails} />
-      )}
+      { !showingDetails[0] && 
+        <MoviesContainer 
+          moviePosters={moviePosters} 
+          changeScore={changeScore}
+          setShowingDetails={setShowingDetails}
+        />}
+
+      { showingDetails[0] &&
+        <MovieDetails
+        movie_id={showingDetails[1]}
+        />}
     </main>
   )
 }
-
 export default App;
