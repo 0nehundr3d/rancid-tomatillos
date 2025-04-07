@@ -1,7 +1,6 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 // import searchIcon from '../icons/search.png';
-// import homeIcon from '../icons/home.png';
 
 // Example imports (for later):
 // import moviePosters from '../data/movie_posters';
@@ -10,6 +9,7 @@ import { useEffect, useState } from 'react';
 // import MovieDetails from '../MovieDetails/MovieDetails'; //function
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import MovieDetails from '../MovieDetails/MovieDetails'
+import homeIcon from '../icons/home.png'
 
 function App() {
   const [moviePosters, setMoviePosters] = useState([])
@@ -52,6 +52,11 @@ function App() {
     <main className='App'>
       <header>
         <h1>rancid tomatillos</h1>
+        { showingDetails[0] &&
+        <div className='HomeButton'>
+          <img src={homeIcon} alt="Home Button" onClick={() => {setShowingDetails([false, null])}}/>
+        </div>
+        }
       </header>
 
       { !showingDetails[0] && 
@@ -63,7 +68,8 @@ function App() {
 
       { showingDetails[0] &&
         <MovieDetails
-        movie_id={showingDetails[1]}/>}
+        movie_id={showingDetails[1]}
+        />}
     </main>
   )
 }
