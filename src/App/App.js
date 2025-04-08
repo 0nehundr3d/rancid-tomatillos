@@ -14,15 +14,22 @@ import homeIcon from '../icons/home.png'
 function App() {
   const [moviePosters, setMoviePosters] = useState([])
   const [showingDetails, setShowingDetails] = useState([false, null])
+  const [error, setError] = useState(false)
 
   useEffect(() => {
     fetch(`https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies`)
-      .then((response) => response.json())
-      .then((data) => {
-        setMoviePosters(data)
-      })
-      .catch((err) => console.error("Fetch failed:", err));
-  }, [])
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Something went wrong')
+      }
+      return response.json()
+    })
+    .then((data) => setMoviePosters(data))
+    .catch((err) => {
+      console.error("Fetch failed:", err)
+      setError(true); // Flag error for conditional rendering
+    })
+}, []);
 
   const changeScore = (id, upVoted) => {
     const findMovie = moviePosters.find( movie => movie.id === id)
@@ -70,6 +77,9 @@ function App() {
         <MovieDetails
         movie_id={showingDetails[1]}
         />}
+
+
+      {error && <p>Something went wrong. Please try again later.</p>}
     </main>
   )
 }
