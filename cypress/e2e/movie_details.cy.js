@@ -62,4 +62,18 @@ describe('Movie Details', () => {
     .get(".MoviePoster").first().find("#upvote").click()
     .get(".MoviePoster p").first().should("have.text", "Votes: 8536")
   })
+
+  it("Should decrease the movies vote count by one when downvoted", () => {
+    cy.intercept("PATCH", "https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies/389", {
+      statusCode: 200,
+      body: {
+        "id": 389,
+        "poster_path": "https://image.tmdb.org/t/p/original//ow3wq89wM8qd5X7hWKxiRfsFf9C.jpg",
+        "title": "12 Angry Men",
+        "vote_count": 8534
+    }
+    })
+    .get(".MoviePoster").first().find("#upvote").click()
+    .get(".MoviePoster p").first().should("have.text", "Votes: 8534")
+  })
 })
