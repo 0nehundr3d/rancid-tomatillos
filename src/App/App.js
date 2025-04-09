@@ -1,5 +1,6 @@
 import './App.css';
 import { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom'
 // import searchIcon from '../icons/search.png';
 
 // Example imports (for later):
@@ -66,12 +67,9 @@ function App() {
         }
       </header>
 
-      { !showingDetails[0] && 
-        <MoviesContainer 
-          moviePosters={moviePosters} 
-          changeScore={changeScore}
-          setShowingDetails={setShowingDetails}
-        />}
+        <Routes>
+          <Route path="/" element={<MoviesContainer moviePosters={moviePosters} changeScore={changeScore} />} />
+        </Routes>
 
       { showingDetails[0] &&
         <MovieDetails
