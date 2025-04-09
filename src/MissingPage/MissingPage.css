@@ -1,0 +1,8 @@
+.MissingPage {
+    display: flex;
+    justify-content: center;
+}
+
+.MissingPage h2 {
+    font-size: 60px;
+}

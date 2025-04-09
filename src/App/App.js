@@ -1,5 +1,6 @@
 import './App.css';
 import { useEffect, useState } from 'react';
+import { Route, Routes, Navigate } from 'react-router-dom'
 // import searchIcon from '../icons/search.png';
 
 // Example imports (for later):
@@ -9,6 +10,7 @@ import { useEffect, useState } from 'react';
 // import MovieDetails from '../MovieDetails/MovieDetails'; //function
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import MovieDetails from '../MovieDetails/MovieDetails'
+import MissingPage from '../MissingPage/MissingPage'
 import homeIcon from '../icons/home.png'
 
 function App() {
@@ -66,12 +68,11 @@ function App() {
         }
       </header>
 
-      { !showingDetails[0] && 
-        <MoviesContainer 
-          moviePosters={moviePosters} 
-          changeScore={changeScore}
-          setShowingDetails={setShowingDetails}
-        />}
+        <Routes>
+          <Route path="/" element={<MoviesContainer moviePosters={moviePosters} changeScore={changeScore} />} />
+          <Route path="/missing_page" element={<MissingPage />} />
+          <Route path='*' element={<Navigate to="/missing_page" replace />} />
+        </Routes>
 
       { showingDetails[0] &&
         <MovieDetails
