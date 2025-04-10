@@ -1,20 +1,43 @@
 import { useParams } from 'react-router-dom';
 import './MovieDetails.css';
 import { useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 
 function MovieDetails() {
   const [movieDetails, setMovieDetails] = useState(null)
+  const [movieNotFound, setMovieNotFound] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
   const { movieId } = useParams()
 
   useEffect(() => {
     fetch(`https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies/${movieId}`)
-    .then(((response) => response.json()))
-    .then((data) => {
-      setMovieDetails(data)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Movie ID ${movieId} not found. Please try again.`)
+      }
+      return response.json()
     })
-    .catch((err) => console.log("Failed to fetch movie details:", err))
-  }, [movieId])
+    .then(data => {
+      if (!data.id) {
+        setMovieNotFound(true)
+      } else {
+        setMovieDetails(data)
+      }
+    })
+    .catch((err) => {
+      console.error(err.message)
+      setErrorMessage(err.message)
+      setMovieNotFound(true)
+    })
+}, [movieId])
 
+  if (movieNotFound) {
+    return (
+      <section className="ErrorMessage">
+        <p>{errorMessage}</p>
+      </section>
+    )
+  }
   if (!movieDetails) return <p>Loading...</p>
 
   return (
@@ -34,22 +57,4 @@ function MovieDetails() {
   )
 }
 
-export default MovieDetails;
-
-  // const { backdrop_path, title, genre_ids, overview } = movie
-
-  // return (
-  //   <section className='MovieDetails'>
-  //     /* <img src={backdrop_path} alt={`Backdrop for ${title}`} />
-
-  //     <div className="DetailsBox">
-  //       <h2>{movie.title}</h2>
-  //         <div className="GenreContainer">
-  //           {genre_ids.map((genre, index) => (
-  //             <span key={index} className="GenreBox">{genre}</span>
-  //           ))}
-  //         </div>
-  //       <p>{movie.overview}</p>
-  //     </div> */
-  //   </section>
-  // );
+export default MovieDetails

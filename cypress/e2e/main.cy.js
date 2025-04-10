@@ -52,4 +52,9 @@ describe('Main Page', () => {
     cy.wait('@getMoviesError').its('response.statusCode').should('eq', 500)
     cy.contains('Something went wrong. Please try again later.')
   })
+
+  it('displays an error for an invalid movie ID', () => {
+    cy.visit('http://localhost:3000/9999999')
+    cy.contains('Movie ID 9999999 not found. Please try again.')
+  })
 })

@@ -19,6 +19,8 @@ h1 {
   color: white;
   font-size: 45px;
   letter-spacing: 5px;
+  text-shadow: 0 0 10px darkgreen;
+
 }
 
 p {
@@ -26,15 +28,13 @@ p {
   text-align: center;
   margin-top: 50px;
   color: white;
+  font-weight: bold;
 }
 
 .HomeButton {
-  background-color: transparent;
-  border-color: transparent;
-}
-
-.HomeButton img {
   width: 40px;
   height: 40px;
-  color: white;
+  box-shadow: 0 0 15px darkgreen;
+  background-color: transparent;
+  border-color: transparent;
 }
