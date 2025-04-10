@@ -1,6 +1,6 @@
 import './App.css';
 import { useEffect, useState } from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom'
+import { Route, Routes, Navigate, useLocation, Link } from 'react-router-dom'
 // import searchIcon from '../icons/search.png';
 
 // Example imports (for later):
@@ -12,9 +12,13 @@ import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import MovieDetails from '../MovieDetails/MovieDetails'
 import MissingPage from '../MissingPage/MissingPage'
 
+import homeButton from '../icons/home.png'
+
 function App() {
   const [moviePosters, setMoviePosters] = useState([])
   const [error, setError] = useState(false)
+
+  const path = useLocation()
 
   useEffect(() => {
     fetch(`https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies`)
@@ -55,6 +59,7 @@ function App() {
     <main className='App'>
       <header>
         <h1>rancid tomatillos</h1>
+        {!(path.pathname === "/") && <Link to="/"><img className="homeButton" src={homeButton} /></Link>}
       </header>
 
         <Routes>
