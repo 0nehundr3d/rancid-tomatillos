@@ -59,7 +59,7 @@ function App() {
     <main className='App'>
       <header>
         <h1>rancid tomatillos</h1>
-        {!(path.pathname === "/") && <Link to="/"><img className="homeButton" src={homeButton} /></Link>}
+        {!(path.pathname === "/") && <Link to="/"><img className="HomeButton" src={homeButton} /></Link>}
       </header>
 
         <Routes>

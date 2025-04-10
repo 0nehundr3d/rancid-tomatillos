@@ -2,7 +2,15 @@
     width: 15%;
     margin: 20px;
     margin-bottom: 0%;
+    box-shadow: 0 0 5px #444;
     text-align: center;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.MoviePoster:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(100, 100, 255, 0.4);
 }
   
 .MoviePoster img {
@@ -15,6 +23,11 @@
 .MoviePoster h2 {
     font-size: 0.5rem;
     color: #444;
+}
+
+.VoteBox:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(100, 100, 255, 0.4);
 }
 
 .VoteBox {
@@ -35,7 +48,13 @@
     text-align: center;
 }
 
+.VoteBox img:hover {
+    transform: scale(1.00);
+    box-shadow: 0 0 15px rgba(100, 100, 255, 0.4);
+}
+
 .VoteBox img {
+    cursor: pointer;
     margin-top: -5px;
     padding-top: 7px;
     height: 15px;
