@@ -11,11 +11,9 @@ import { Route, Routes, Navigate } from 'react-router-dom'
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import MovieDetails from '../MovieDetails/MovieDetails'
 import MissingPage from '../MissingPage/MissingPage'
-import homeIcon from '../icons/home.png'
 
 function App() {
   const [moviePosters, setMoviePosters] = useState([])
-  const [showingDetails, setShowingDetails] = useState([false, null])
   const [error, setError] = useState(false)
 
   useEffect(() => {
@@ -36,10 +34,6 @@ function App() {
   const changeScore = (id, upVoted) => {
     const findMovie = moviePosters.find( movie => movie.id === id)
     if (!findMovie) return
-
-    const updatedVote = upVoted
-      ? findMovie.vote_count + 1
-      : findMovie.vote_count - 1
       
     fetch(`https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies/${id}`, {
       method: 'PATCH',
@@ -61,23 +55,14 @@ function App() {
     <main className='App'>
       <header>
         <h1>rancid tomatillos</h1>
-        { showingDetails[0] &&
-        <div className='HomeButton'>
-          <img src={homeIcon} alt="Home Button" onClick={() => {setShowingDetails([false, null])}}/>
-        </div>
-        }
       </header>
 
         <Routes>
           <Route path="/" element={<MoviesContainer moviePosters={moviePosters} changeScore={changeScore} />} />
+          <Route path="/:movieId" element={<MovieDetails />} />
           <Route path="/missing_page" element={<MissingPage />} />
           <Route path='*' element={<Navigate to="/missing_page" replace />} />
         </Routes>
-
-      { showingDetails[0] &&
-        <MovieDetails
-        movie_id={showingDetails[1]}
-        />}
 
 
       {error && <p>Something went wrong. Please try again later.</p>}

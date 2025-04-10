@@ -1,17 +1,19 @@
+import { useParams } from 'react-router-dom';
 import './MovieDetails.css';
 import { useEffect, useState } from 'react';
 
-function MovieDetails({ movie_id }) {
+function MovieDetails() {
   const [movieDetails, setMovieDetails] = useState(null)
+  const { movieId } = useParams()
 
   useEffect(() => {
-    fetch(`https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies/${movie_id}`)
+    fetch(`https://rancid-tomatillos-api-ce4a3879078e.herokuapp.com/api/v1/movies/${movieId}`)
     .then(((response) => response.json()))
     .then((data) => {
       setMovieDetails(data)
     })
     .catch((err) => console.log("Failed to fetch movie details:", err))
-  }, [])
+  }, [movieId])
 
   if (!movieDetails) return <p>Loading...</p>
 

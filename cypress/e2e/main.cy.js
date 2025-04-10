@@ -20,7 +20,7 @@ describe('Main Page', () => {
     cy.get('.MoviePoster')
       .first()
       .within(() => {
-        cy.get('img').should('have.attr', 'alt', 'Poster for movie ID 155')
+        cy.get('img').should('have.attr', 'alt', 'poster for The Dark Knight')
         cy.contains('Votes: 32544')
     })
   })
@@ -29,7 +29,7 @@ describe('Main Page', () => {
     cy.get('.MoviePoster')
       .last()
       .within(() => {
-        cy.get('img').should('have.attr', 'alt', 'Poster for movie ID 680')
+        cy.get('img').should('have.attr', 'alt', 'poster for Pulp Fiction')
         cy.contains('Votes: 27642')
     })
   })
