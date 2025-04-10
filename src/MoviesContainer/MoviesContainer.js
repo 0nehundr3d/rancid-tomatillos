@@ -11,6 +11,7 @@ function MoviesContainer({ moviePosters, changeScore }) {
             <MoviePoster
               id={movie.id}
               key={movie.id}
+              title={movie.title}
               poster_path={movie.poster_path}
               vote_count={movie.vote_count}
               changeScore={changeScore}
