@@ -1,17 +1,10 @@
 import './App.css';
 import { useEffect, useState } from 'react';
 import { Route, Routes, Navigate, useLocation, Link } from 'react-router-dom'
-// import searchIcon from '../icons/search.png';
 
-// Example imports (for later):
-// import moviePosters from '../data/movie_posters';
-// import movieDetails from '../data/movie_details'; //mock data
-
-// import MovieDetails from '../MovieDetails/MovieDetails'; //function
 import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import MovieDetails from '../MovieDetails/MovieDetails'
 import MissingPage from '../MissingPage/MissingPage'
-
 import homeButton from '../icons/home.png'
 
 function App() {
