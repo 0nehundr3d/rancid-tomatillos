@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 import './MovieDetails.css';
 import { useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
 
 function MovieDetails() {
   const [movieDetails, setMovieDetails] = useState(null)

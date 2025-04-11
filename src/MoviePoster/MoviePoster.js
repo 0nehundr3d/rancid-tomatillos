@@ -2,7 +2,6 @@ import './MoviePoster.css';
 import upvote from '../icons/upvote.png'
 import downvote from '../icons/downvote.png'
 import { Link } from 'react-router-dom'
-// import movieDetails from '../data/movie_details';
 
 function MoviePoster({ id, title, poster_path, vote_count, changeScore }) {
   return (
