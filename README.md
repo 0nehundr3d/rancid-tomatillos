@@ -112,5 +112,11 @@
 </table>
 
 <p align="center">
+  <a href="https://rancid-tomatillos-1-tqkd.onrender.com/" target="_blank">
+    <strong>🚀 View the Live Site</strong>
+  </a>
+</p>
+
+<p align="center">
  ☠️ Follow us on LinkedIn and GitHub for future projects! ☠️
 </p>
