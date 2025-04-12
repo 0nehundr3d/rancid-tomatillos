@@ -53,8 +53,8 @@ function App() {
     <main className='App'>
       <header>
         <h1>rancid tomatillos</h1>
-        <SearchBar onSearch={setSearchTerm} />
         {!(path.pathname === "/") && <Link to="/"><img className="HomeButton" src={homeButton} /></Link>}
+        {path.pathname === '/' && <SearchBar onSearch={setSearchTerm} />}
       </header>
 
         <Routes>
