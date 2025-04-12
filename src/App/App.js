@@ -6,10 +6,12 @@ import MoviesContainer from '../MoviesContainer/MoviesContainer';
 import MovieDetails from '../MovieDetails/MovieDetails'
 import MissingPage from '../MissingPage/MissingPage'
 import homeButton from '../icons/home.png'
+import SearchBar from '../SearchBar/SearchBar';
 
 function App() {
   const [moviePosters, setMoviePosters] = useState([])
   const [error, setError] = useState(false)
+  const [searchTerm, setSearchTerm] = useState('')
 
   const path = useLocation()
 
@@ -46,17 +48,17 @@ function App() {
       })
       .catch(error => console.error("Failed to update vote count:", error))
   }
-
   
   return (
     <main className='App'>
       <header>
         <h1>rancid tomatillos</h1>
+        <SearchBar onSearch={setSearchTerm} />
         {!(path.pathname === "/") && <Link to="/"><img className="HomeButton" src={homeButton} /></Link>}
       </header>
 
         <Routes>
-          <Route path="/" element={<MoviesContainer moviePosters={moviePosters} changeScore={changeScore} />} />
+          <Route path="/" element={<MoviesContainer moviePosters={moviePosters} changeScore={changeScore} searchTerm={searchTerm} />} />
           <Route path="/:movieId" element={<MovieDetails />} />
           <Route path="/missing_page" element={<MissingPage />} />
           <Route path='*' element={<Navigate to="/missing_page" replace />} />
